@@ -2,7 +2,7 @@ import { MongoClient } from "mongodb";
 import path from "path";
 
 const MONGODB_URI =
-  "mongodb+srv://Tevxion:Zerxen1122@tevxion.ulfcw.mongodb.net/";
+  "mongodb+srv://Tevxion:Zerxen1122@tevxion.ulfcw.mongodb.net/teman_kampus?retryWrites=true&w=majority";
 const MONGODB_DB = "friends_db";
 
 if (!MONGODB_URI) {
