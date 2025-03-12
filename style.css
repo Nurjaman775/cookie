@@ -1,51 +1,52 @@
 .container {
-    margin: 20px;
-    font-family: Arial, sans-serif;
+  margin: 20px;
+  font-family: Arial, sans-serif;
 }
 
 table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
 }
 
-th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
 }
 
 th {
-    background-color: #f4f4f4;
+  background-color: #f4f4f4;
 }
 
 .editable {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .editing {
-    padding: 0;
+  padding: 0;
 }
 
 .editing input {
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
 }
 
 .button-group {
-    display: flex;
-    gap: 4px;
+  display: flex;
+  gap: 4px;
 }
 
 button {
-    padding: 5px 10px;
-    cursor: pointer;
+  padding: 5px 10px;
+  cursor: pointer;
 }
 
 .delete-btn {
-    background-color: #ff4444;
-    color: white;
-    border: none;
-    border-radius: 3px;
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  border-radius: 3px;
 }
