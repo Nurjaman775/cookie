@@ -1,13 +1,7 @@
-import { MongoClient } from "mongodb";
-import path from "path";
+import { MongoClient, ServerApiVersion } from "mongodb";
 
-const MONGODB_URI =
-  "mongodb+srv://Tevxion:Zerxen1122@tevxion.ulfcw.mongodb.net/teman_kampus?retryWrites=true&w=majority";
-const MONGODB_DB = "friends_db";
-
-if (!MONGODB_URI) {
-  throw new Error("Please define MONGODB_URI environment variable");
-}
+const uri = process.env.MONGODB_URI;
+const MONGODB_DB = "teman_kampus"; // Pastikan nama database sesuai dengan URI
 
 let cachedClient = null;
 
@@ -17,16 +11,20 @@ async function connectToDatabase() {
   }
 
   try {
-    const client = await MongoClient.connect(MONGODB_URI, {
-      maxPoolSize: 10,
+    const client = new MongoClient(uri, {
       serverApi: {
-        version: "1",
+        version: ServerApiVersion.v1,
         strict: true,
         deprecationErrors: true,
       },
     });
 
-    console.log("Connected to MongoDB successfully");
+    await client.connect();
+    await client.db("admin").command({ ping: 1 });
+    console.log(
+      "Pinged your deployment. You successfully connected to MongoDB!"
+    );
+
     cachedClient = client;
     return client;
   } catch (error) {
@@ -53,14 +51,17 @@ export default async function handler(req, res) {
 
     if (req.method === "GET") {
       const data = await collection.find({}).toArray();
+      console.log("Data retrieved from MongoDB:", data); // Tambahkan logging
       res.status(200).json(data);
     } else if (req.method === "POST") {
       const data = req.body;
+      console.log("Data received for insertion:", data); // Tambahkan logging
       if (!Array.isArray(data)) {
         throw new Error("Data harus berupa array");
       }
       await collection.deleteMany({}); // Clear existing data
       await collection.insertMany(data);
+      console.log("Data successfully inserted into MongoDB"); // Tambahkan logging
       res.status(200).json({ message: "Data berhasil disimpan" });
     }
   } catch (error) {
